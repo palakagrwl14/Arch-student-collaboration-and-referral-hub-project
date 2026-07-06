@@ -1,0 +1,168 @@
+.referrals-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: 100%;
+}
+
+.referral-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  height: 100%;
+}
+
+.referral-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.referral-slots-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-xs);
+}
+
+.referral-slots-num {
+  font-weight: var(--font-bold);
+  color: var(--warning);
+}
+
+.referral-eligibility-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.referral-eligibility-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: var(--font-bold);
+}
+
+.referral-eligibility-value {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+/* Details Page styling split */
+.referral-details-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-6);
+}
+
+.details-alumni-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--bg-secondary);
+}
+
+.alumni-card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.alumni-stat-box {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-tertiary);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.alumni-stat-val {
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  color: var(--accent-primary);
+}
+
+.alumni-stat-lbl {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Post Referral Form */
+.post-referral-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-row-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+/* Applications Table (Alumni Dashboard view) */
+.applications-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.applicants-table-card {
+  overflow-x: auto;
+}
+
+.app-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.app-table th {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-weight: var(--font-bold);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.app-table td {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-sm);
+  vertical-align: middle;
+}
+
+.app-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.action-row-buttons {
+  display: flex;
+  gap: var(--space-2);
+}
+
+@media (max-width: 1024px) {
+  .referral-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-row-split {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,324 @@
+.workspace-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: 100%;
+}
+
+.workspace-header-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.workspace-project-picker {
+  min-width: 250px;
+}
+
+/* Tabs list styling */
+.workspace-tabs {
+  display: flex;
+  gap: var(--space-1);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+}
+
+.workspace-tab-btn {
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text-secondary);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.workspace-tab-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-glass);
+}
+
+.workspace-tab-btn.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+}
+
+/* Kanban Board styling */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.kanban-column {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 500px;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--space-2);
+}
+
+.column-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.column-count {
+  font-size: var(--text-xs);
+  background: var(--bg-tertiary);
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+}
+
+.kanban-tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.task-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: border-color var(--transition-fast);
+}
+
+.task-card:hover {
+  border-color: var(--border-hover);
+}
+
+.task-card-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  line-height: 1.3;
+}
+
+.task-card-desc {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.task-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-assignee-avatar {
+  border: 1.5px solid var(--bg-secondary);
+}
+
+.task-action-btns {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.task-move-btn {
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-move-btn:hover {
+  background: var(--bg-glass);
+  color: var(--text-primary);
+}
+
+/* Notes & Shared notes layout */
+.workspace-notes-split {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-6);
+}
+
+.notes-list-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  border-right: 1px solid var(--border);
+  padding-right: var(--space-4);
+}
+
+.note-sidebar-item {
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.note-sidebar-item:hover {
+  background: var(--bg-glass);
+}
+
+.note-sidebar-item.active {
+  background: var(--accent-light);
+  border-color: var(--border-accent);
+}
+
+.note-sidebar-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+}
+
+.note-sidebar-meta {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* Milestones styling */
+.milestones-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 600px;
+}
+
+.milestone-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.milestone-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.milestone-title-text {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+}
+
+.milestone-title-text.completed {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.milestone-date-badge {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* Team Chat Panel */
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+  height: 520px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: var(--space-4);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.chat-bubble {
+  max-width: 70%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-bubble-sent {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--accent-primary), #4f6f4f);
+  color: white;
+  border-bottom-right-radius: 0;
+}
+
+.chat-bubble-received {
+  align-self: flex-start;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-bottom-left-radius: 0;
+  border: 1px solid var(--border);
+}
+
+.chat-bubble-sender {
+  font-size: 10px;
+  font-weight: var(--font-bold);
+  margin-bottom: 2px;
+  color: var(--accent-primary);
+}
+
+.chat-bubble-sent .chat-bubble-sender {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.chat-bubble-time {
+  font-size: 9px;
+  align-self: flex-end;
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--bg-tertiary);
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 1024px) {
+  .kanban-board {
+    grid-template-columns: 1fr;
+  }
+  .kanban-column {
+    min-height: auto;
+  }
+  .workspace-notes-split {
+    grid-template-columns: 1fr;
+  }
+  .notes-list-sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--space-4);
+    padding-right: 0;
+  }
+}

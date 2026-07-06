@@ -1,0 +1,113 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-family);
+  font-weight: var(--font-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.badge-sm {
+  padding: 2px 8px;
+  font-size: 10px;
+}
+
+.badge-md {
+  padding: 4px 12px;
+  font-size: 12px;
+}
+
+/* Variants */
+.badge-active, .badge-completed {
+  background: var(--success-light);
+  color: var(--success);
+}
+.badge-active::before, .badge-completed::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--success);
+  border-radius: var(--radius-full);
+}
+
+.badge-pending {
+  background: var(--warning-light);
+  color: var(--warning);
+}
+.badge-pending::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--warning);
+  border-radius: var(--radius-full);
+}
+
+/* Badge forming: #9ca3af (gray pill) */
+.badge-forming {
+  background: #9ca3af;
+  color: #ffffff;
+}
+.badge-forming::before {
+  display: none; /* solid pill style */
+}
+
+.badge-closed, .badge-abandoned {
+  background: rgba(108, 115, 128, 0.15);
+  color: var(--status-closed);
+}
+.badge-closed::before, .badge-abandoned::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--status-closed);
+  border-radius: var(--radius-full);
+}
+
+.badge-rejected {
+  background: var(--error-light);
+  color: var(--error);
+}
+.badge-rejected::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--error);
+  border-radius: var(--radius-full);
+}
+
+/* Badge open: #6b8f6b (sage green) */
+.badge-open {
+  background: #6b8f6b;
+  color: #ffffff;
+}
+.badge-open::before {
+  display: none; /* solid pill style */
+}
+
+.badge-internship {
+  background: var(--info-light);
+  color: var(--info);
+}
+
+/* Badge fulltime: #0f0f0f (black pill in light theme, white in dark theme) */
+.badge-fulltime {
+  background: #0f0f0f;
+  color: #ffffff;
+}
+
+/* Dark mode overrides for badges */
+.dark-theme .badge-fulltime {
+  background: #ffffff;
+  color: #0f0f0f;
+}
+
+.badge-verified {
+  background: var(--success-light);
+  color: var(--success);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
