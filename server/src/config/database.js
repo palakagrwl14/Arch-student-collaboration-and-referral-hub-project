@@ -8,9 +8,11 @@ const { Pool } = pg;
 // Connection string sourced from environment variables (Neon/Render/AWS or local PG)
 const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:Palak14@localhost:5432/CampusCollab';
 
+const isLocal = connectionString.includes('localhost') || connectionString.includes('127.0.0.1');
+
 const pool = new Pool({
   connectionString,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+  ssl: isLocal ? false : { rejectUnauthorized: false }
 });
 
 // Verify Connection
