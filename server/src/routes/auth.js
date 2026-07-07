@@ -34,12 +34,8 @@ router.post('/signup', authLimiter, validateRequest(signupSchema), async (req, r
 
   try {
     // Check if email already exists
-    const existingResult = await pool.query('SELECT id, is_email_verified FROM users WHERE email = $1', [normalizedEmail]);
+    const existingResult = await pool.query('SELECT id FROM users WHERE email = $1', [normalizedEmail]);
     if (existingResult.rows.length > 0) {
-      const existingUser = existingResult.rows[0];
-      if (!existingUser.is_email_verified) {
-        return res.status(400).json(formatResponse(false, { unverified: true, email: normalizedEmail }, 'Email registered but unverified. Please verify your email.'));
-      }
       return res.status(400).json(formatResponse(false, null, 'Email already registered'));
     }
 
@@ -47,17 +43,20 @@ router.post('/signup', authLimiter, validateRequest(signupSchema), async (req, r
     const passwordHash = bcrypt.hashSync(password, 12);
     const verificationStatus = role === 'alumni' ? 'unverified' : 'verified';
 
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiry = new Date(Date.now() + 10 * 60 * 1000);
+    // Auto-verify email upon registration (bypassing SMTP to avoid Render network block)
+    const userResult = await pool.query(`
+      INSERT INTO users (id, email, password_hash, role, name, verification_status, is_email_verified)
+      VALUES ($1, $2, $3, $4, $5, $6, true)
+      RETURNING *
+    `, [userId, normalizedEmail, passwordHash, role, name, verificationStatus]);
 
-    await pool.query(`
-      INSERT INTO users (id, email, password_hash, role, name, verification_status, is_email_verified, email_otp, otp_expiry)
-      VALUES ($1, $2, $3, $4, $5, $6, false, $7, $8)
-    `, [userId, normalizedEmail, passwordHash, role, name, verificationStatus, otp, expiry]);
+    const user = userResult.rows[0];
+    const token = generateToken(user);
 
-    await sendOtpEmail(normalizedEmail, otp);
-
-    res.status(201).json(formatResponse(true, { email: normalizedEmail }, 'Signup successful. Verification OTP sent to your email.'));
+    res.status(201).json(formatResponse(true, {
+      token,
+      user: sanitizeUser(user)
+    }, 'Signup successful! Welcome to Arch.'));
   } catch (error) {
     console.error('Signup error:', error);
     res.status(500).json(formatResponse(false, null, 'Internal server error during registration'));
