@@ -82,13 +82,20 @@ export default function Signup() {
     setLoading(true);
 
     try {
-      await signup({ name, email, password, role });
-      toast.success('Welcome to Arch! Registration successful.');
-      navigate('/dashboard');
+      const res = await signup({ name, email, password, role });
+      setEmail(res.email); // Store the email returned by signup
+      toast.success('Registration initial step complete. Code sent to email!');
+      setStep('verify');
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || 'Registration failed');
-      toast.error('Signup failed');
+      if (err.response?.data?.data?.unverified) {
+        setEmail(err.response.data.data.email);
+        toast.error('Email is unverified. Verification screen loaded.');
+        setStep('verify');
+      } else {
+        setError(err.response?.data?.message || 'Registration failed');
+        toast.error('Signup failed');
+      }
     } finally {
       setLoading(false);
     }
