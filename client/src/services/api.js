@@ -1,11 +1,18 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+export const getAbsoluteUrl = (path) => {
+  if (!path) return '';
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  const baseUrl = (import.meta.env.VITE_API_URL || '/api').replace(/\/api\/?$/, '');
+  return `${baseUrl}${path.startsWith('/') ? '' : '/'}${path}`;
+};
 
 // Request interceptor - attach JWT token
 api.interceptors.request.use(

@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { HiOutlineBriefcase, HiOutlineUserGroup, HiOutlineEnvelope, HiOutlineClipboardDocumentCheck } from 'react-icons/hi2';
 import { Card, Button, Badge, Loader, EmptyState, Modal, Input } from '../../components/common';
 import Avatar from '../../components/common/Avatar';
-import api from '../../services/api';
+import api, { getAbsoluteUrl } from '../../services/api';
 import '../../styles/pages/Referrals.css';
 
 export default function MyReferrals() {
@@ -171,7 +171,7 @@ export default function MyReferrals() {
 
                         <div className="applicant-bio" style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                           {cand.resume_path && (
-                            <a href={cand.resume_path} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'var(--accent-primary)' }}>
+                            <a href={getAbsoluteUrl(cand.resume_path)} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'var(--accent-primary)' }}>
                               Resume.pdf
                             </a>
                           )}

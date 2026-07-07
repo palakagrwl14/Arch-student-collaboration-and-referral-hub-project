@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { HiOutlineShieldCheck, HiOutlineFlag, HiOutlineListBullet, HiOutlineCheck, HiOutlineXMark } from 'react-icons/hi2';
 import { Card, Button, Badge, Loader, EmptyState } from '../../components/common';
-import api from '../../services/api';
+import api, { getAbsoluteUrl } from '../../services/api';
 
 export default function AdminPanel() {
   const [loading, setLoading] = useState(true);
@@ -117,7 +117,7 @@ export default function AdminPanel() {
                     {v.verification_proof && (
                       <div className="applicant-bio">
                         <strong>Uploaded Proof:</strong>{' '}
-                        <a href={v.verification_proof} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'var(--accent-primary)' }}>
+                        <a href={getAbsoluteUrl(v.verification_proof)} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'var(--accent-primary)' }}>
                           Inspect Proof Document
                         </a>
                       </div>

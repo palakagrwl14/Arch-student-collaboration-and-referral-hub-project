@@ -1,3 +1,4 @@
+import { getAbsoluteUrl } from '../../services/api';
 import '../../styles/components/Avatar.css';
 
 const GRADIENTS = [
@@ -42,7 +43,7 @@ export default function Avatar({
   return (
     <div className={`avatar-container avatar-${size} ${className}`} {...props}>
       {src ? (
-        <img src={src} alt={name} className="avatar-img" />
+        <img src={getAbsoluteUrl(src)} alt={name} className="avatar-img" />
       ) : (
         <div className="avatar-fallback" style={{ background }}>
           {initials}
