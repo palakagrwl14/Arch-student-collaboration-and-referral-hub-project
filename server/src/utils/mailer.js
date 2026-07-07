@@ -30,7 +30,7 @@ async function getTransporter() {
     transporter = nodemailer.createTransport({
       host: resolvedHost,
       port: parseInt(process.env.SMTP_PORT || '587', 10),
-      secure: false, // Set to false for port 587
+      secure: parseInt(process.env.SMTP_PORT || '587', 10) === 465, // True for 465, false for 587 // Set to false for port 587
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS
