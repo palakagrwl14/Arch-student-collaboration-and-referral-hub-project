@@ -1,5 +1,5 @@
 import LandingNavbar from "../components/landing/LandingNavbar";
-import Footer from "../components/landing/Footer";
+import Footer from "../components/landing/footer";
 
 export default function About() {
   return (

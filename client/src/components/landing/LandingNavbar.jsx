@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import "../../styles/components/landingNavbar.css";
+import "../../styles/components/landingnavbar.css";
 
 export default function LandingNavbar() {
   const navigate = useNavigate();
