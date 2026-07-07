@@ -26,8 +26,26 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
-const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
-app.use(cors({ origin: clientUrl, credentials: true }));
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://arch-student-collaboration-and-refe-seven.vercel.app'
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    
+    const isVercel = origin.endsWith('.vercel.app') && origin.includes('arch');
+    const isAllowed = allowedOrigins.includes(origin) || isVercel;
+    
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(null, new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
