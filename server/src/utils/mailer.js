@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import dns from 'dns';
 
 let transporter;
 
@@ -19,7 +20,9 @@ async function getTransporter() {
         pass: process.env.SMTP_PASS
       },
       // Force IPv4 resolution to bypass Render's IPv6 networking routing bugs (connect ENETUNREACH error)
-      family: 4
+       lookup: (hostname, options, callback) => {
+        dns.lookup(hostname, { family: 4 }, callback);
+      }
     });
     console.log('Mailer: Configured custom SMTP transporter.');
   } else {
