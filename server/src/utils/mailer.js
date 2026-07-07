@@ -78,6 +78,12 @@ async function getTransporter() {
 // Send OTP Mail
 export async function sendOtpEmail(toEmail, otpCode) {
   try {
+    console.log({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    user: process.env.SMTP_USER,
+    from: process.env.SMTP_FROM
+    });
     const client = await getTransporter();
     
     const mailOptions = {
