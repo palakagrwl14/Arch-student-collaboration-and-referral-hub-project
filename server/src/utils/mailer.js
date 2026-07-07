@@ -17,7 +17,9 @@ async function getTransporter() {
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS
-      }
+      },
+      // Force IPv4 resolution to bypass Render's IPv6 networking routing bugs (connect ENETUNREACH error)
+      family: 4
     });
     console.log('Mailer: Configured custom SMTP transporter.');
   } else {
