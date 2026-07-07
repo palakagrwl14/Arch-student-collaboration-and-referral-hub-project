@@ -254,8 +254,13 @@ pool.connect(async (err, client, release) => {
   console.log('Successfully connected to PostgreSQL Database.');
   release();
 
-  // Run schema auto-init
-  await initializeDatabase();
+  // Run schema auto-init (Skip if running the seed script to prevent race conditions!)
+  const isSeeding = process.argv[1] && (process.argv[1].endsWith('seed.js') || process.argv[1].endsWith('seed'));
+  if (!isSeeding) {
+    await initializeDatabase();
+  } else {
+    console.log('Database auto-init bypassed during database seeding.');
+  }
 });
 
 export default pool;
