@@ -10,18 +10,35 @@ async function getTransporter() {
   const hasSmtpConfig = process.env.SMTP_USER && process.env.SMTP_PASS;
 
   if (hasSmtpConfig) {
-    // Production SMTP (e.g., SendGrid, Gmail, AWS SES)
+    const originalHost = process.env.SMTP_HOST || 'smtp.gmail.com';
+    let resolvedHost = originalHost;
+
+    // Force resolve hostname to IPv4 address to bypass Render's IPv6 routing bugs
+    if (originalHost !== 'localhost' && originalHost !== '127.0.0.1') {
+      try {
+        const addresses = await dns.promises.resolve4(originalHost);
+        if (addresses && addresses.length > 0) {
+          resolvedHost = addresses[0];
+          console.log(`Mailer: Resolved ${originalHost} to IPv4 address ${resolvedHost}`);
+        }
+      } catch (dnsErr) {
+        console.warn(`Mailer: DNS resolve4 failed for ${originalHost}, falling back to hostname.`, dnsErr.message);
+      }
+    }
+
+    // Production SMTP
     transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.gmail.com',
-      port: parseInt(process.env.SMTP_PORT || '465', 10),
-      secure: process.env.SMTP_SECURE === 'true' || parseInt(process.env.SMTP_PORT, 10) === 465,
+      host: resolvedHost,
+      port: parseInt(process.env.SMTP_PORT || '587', 10),
+      secure: false, // Set to false for port 587
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS
       },
-      // Force IPv4 resolution to bypass Render's IPv6 networking routing bugs (connect ENETUNREACH error)
-       lookup: (hostname, options, callback) => {
-        dns.lookup(hostname, { family: 4 }, callback);
+      tls: {
+        // This servername option is critical so the SSL handshake verifies against the hostname instead of the IP address
+        servername: originalHost,
+        rejectUnauthorized: false
       }
     });
     console.log('Mailer: Configured custom SMTP transporter.');
