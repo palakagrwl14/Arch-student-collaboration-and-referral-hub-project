@@ -1,0 +1,62 @@
+/* ==================================
+   FOOTER
+================================== */
+
+.landing-footer{
+    background:#ffffff;
+    border-top:1px solid #e8ece8;
+    padding:70px 20px 40px;
+}
+
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.footer-content{
+    text-align:center;
+}
+
+.footer-content h2{
+    font-size:38px;
+    font-weight:800;
+    color:#26442f;
+    margin-bottom:18px;
+}
+
+.footer-content p{
+    max-width:650px;
+    margin:0 auto 30px;
+    color:#6b7280;
+    line-height:1.8;
+    font-size:17px;
+}
+
+.footer-content::after{
+    content:"© 2026 Arch • Built for Students & Alumni";
+    display:block;
+    margin-top:30px;
+    padding-top:25px;
+    border-top:1px solid #e8ece8;
+    color:#9ca3af;
+    font-size:14px;
+}
+
+@media(max-width:768px){
+
+    .landing-footer{
+        padding:50px 20px 30px;
+    }
+
+    .footer-content h2{
+        font-size:30px;
+    }
+
+    .footer-content p{
+        font-size:15px;
+    }
+
+    .footer-content::after{
+        font-size:13px;
+    }
+}

@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import {
+  useNavigate,
+  Link,
+  useLocation,
+  useSearchParams
+} from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import {
   HiOutlineUser,
@@ -17,9 +22,22 @@ export default function Signup() {
   const { signup, verifyOtp, resendOtp, googleLogin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  
-  const [step, setStep] = useState('form'); // 'form' or 'verify'
-  const [role, setRole] = useState('student');
+  const [searchParams] = useSearchParams();
+
+  const [step, setStep] = useState("form");
+
+  const [role, setRole] = useState(() => {
+  const selectedRole = searchParams.get("role");
+
+  if (
+    selectedRole === "student" ||
+    selectedRole === "alumni"
+  ) {
+    return selectedRole;
+  }
+
+  return "student";
+});
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -50,7 +68,20 @@ export default function Signup() {
         { theme: 'outline', size: 'large', width: '100%', shape: 'rectangular' }
       );
     }
-  }, [step, role]); // Re-render button if step or role changes
+    },[location]);
+    useEffect(() => {
+    const selectedRole = searchParams.get("role");
+
+    if (
+    selectedRole === "student" ||
+    selectedRole === "alumni"
+    ) {
+    setRole(selectedRole);
+    }
+    }, [searchParams]);
+    useEffect(() => {
+    /* global google */
+    }, [step, role]); // Re-render button if step or role changes
 
   const handleGoogleResponse = async (response) => {
     setLoading(true);

@@ -5,6 +5,10 @@ import { AuthProvider } from './context/AuthContext';
 // Layout
 import PageShell from './components/layout/PageShell';
 
+// Landing Pages
+import Home from './pages/home';
+import About from './pages/about';
+
 // Auth Pages
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
@@ -60,17 +64,20 @@ export default function App() {
             },
           }}
         />
-        
+
         <Routes>
-          {/* Public Routes */}
+          {/* Public Landing Pages */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+
+          {/* Authentication */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
-          {/* Protected Layout Shell */}
+          {/* Protected Layout */}
           <Route element={<PageShell />}>
             {/* Dashboard */}
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
             {/* Collaboration Hub */}
             <Route path="/projects" element={<ProjectFeed />} />
@@ -93,8 +100,8 @@ export default function App() {
             <Route path="/admin" element={<AdminPanel />} />
           </Route>
 
-          {/* Catch-all fallback */}
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AuthProvider>
     </Router>

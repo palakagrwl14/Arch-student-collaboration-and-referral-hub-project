@@ -1,0 +1,54 @@
+.cta-section{
+    padding:100px 0;
+    background:#f8faf8;
+}
+
+.cta-container{
+    width:min(1200px,92%);
+    margin:auto;
+    background:linear-gradient(135deg,#6b8f6b,#88b488);
+    border-radius:32px;
+    padding:80px 60px;
+    text-align:center;
+    color:#fff;
+    box-shadow:0 25px 60px rgba(107,143,107,.25);
+}
+
+.cta-content span{
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    opacity:.9;
+}
+
+.cta-content h2{
+    font-size:52px;
+    margin:18px 0;
+    font-weight:800;
+    line-height:1.2;
+}
+
+.cta-content p{
+    max-width:700px;
+    margin:20px auto 0;
+    line-height:1.8;
+    font-size:18px;
+    opacity:.95;
+}
+
+@media(max-width:768px){
+
+    .cta-container{
+        padding:55px 25px;
+    }
+
+    .cta-content h2{
+        font-size:36px;
+    }
+
+    .cta-content p{
+        font-size:16px;
+    }
+
+}
