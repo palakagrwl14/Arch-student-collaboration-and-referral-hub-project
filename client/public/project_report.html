@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Report - Arch</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background-color: #ffffff;
+    }
+
+    h1, h2, h3 {
+      color: #0f0f0f;
+      font-weight: 700;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    h1 {
+      font-size: 32px;
+      border-bottom: 2px solid #6b8f6b;
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 22px;
+      color: #5a7b5a;
+      border-bottom: 1px solid #d4ddd4;
+      padding-bottom: 6px;
+    }
+
+    h3 {
+      font-size: 18px;
+    }
+
+    p, li {
+      font-size: 15px;
+      color: #4a4a4a;
+    }
+
+    ul, ol {
+      margin-bottom: 1.5em;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 0.5em;
+    }
+
+    code {
+      font-family: Consolas, Monaco, monospace;
+      background-color: #f4f7f4;
+      color: #0f0f0f;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    pre {
+      background-color: #f4f7f4;
+      border: 1px solid #d4ddd4;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    pre code {
+      background-color: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid #d4ddd4;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #e8ede8;
+      color: #0f0f0f;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fcfdfc;
+    }
+
+    .highlight {
+      color: #6b8f6b;
+      font-weight: 600;
+    }
+
+    .alert {
+      background-color: #e8ede8;
+      border-left: 4px solid #6b8f6b;
+      padding: 12px 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+
+    /* Print settings */
+    @media print {
+      body {
+        margin: 20px;
+        font-size: 12pt;
+      }
+      h1, h2, h3 {
+        page-break-after: avoid;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      pre, table {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Project Report: Arch</h1>
+  <p class="highlight" style="font-size: 16px;">Student Collaboration & Referral Hub Platform</p>
+  
+  <div class="alert">
+    <strong>Overview:</strong> Arch is a premium, full-stack web application designed to bridge the gap between college students and professional alumni. The platform empowers students to find teammates, collaborate on projects, and secure job/internship referrals, while providing alumni with a streamlined system to mentor students, share vacancies, and manage candidate applications.
+  </div>
+
+  <h2>1. Executive Summary</h2>
+  <p>In academic and early-career environments, students often face two key challenges: finding qualified peers to build projects (Collaboration) and obtaining professional career entry points (Referrals). Arch solves both by creating a unified network:</p>
+  <ul>
+    <li><strong>The Collaboration Hub:</strong> A workspace where students pitch ideas, recruit teammates, and manage project development using native project management tools (task boards, milestones, and shared notes).</li>
+    <li><strong>The Referral Hub:</strong> A marketplace where verified alumni post referral slots, review applicant profiles, download resumes, and refer candidates.</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <h2>2. Key Modules & Features</h2>
+  
+  <h3>A. Authentication & Session Management</h3>
+  <ul>
+    <li><strong>Dual-Role Onboarding:</strong> Users register either as a Student or Alumni/Employee.</li>
+    <li><strong>Google Single Sign-On (SSO):</strong> Integration of Google OAuth 2.0. The platform dynamically checks if a Google login corresponds to a new user; if so, it prompts them to select their role and sets up their profile seamlessly.</li>
+    <li><strong>Email Verification & Security OTPs:</strong> Nodemailer-driven 6-digit OTP verification wizard during registration and email change flows.</li>
+    <li><strong>Secure Session Handshake:</strong> Stateless JWT (JSON Web Token) authentication stored securely in client browser storage, attached to API calls via Axios interceptors.</li>
+  </ul>
+
+  <h3>B. The Collaboration Hub</h3>
+  <ul>
+    <li><strong>Project Feed:</strong> A searchable feed of student-led projects, filtered by skills required, open roles, and status.</li>
+    <li><strong>Workspaces:</strong> Once a team application is accepted, members gain access to a project workspace containing task boards, milestones, and shared notes.</li>
+    <li><strong>Student Portfolio:</strong> Completed projects are verified and showcased directly on students' public profiles.</li>
+  </ul>
+
+  <h3>C. The Referral Hub</h3>
+  <ul>
+    <li><strong>Referral Vacancy Feed:</strong> Searchable listing of job/internship referrals posted by verified alumni. Features parameters like company name, job role, package details, eligibility criteria (CGPA, batches), and remaining referral slots.</li>
+    <li><strong>Applications Manager:</strong> Students upload their resume and cover pitch. Alumni can review candidate cards, audit resumes, and update application status (Applied, Under Review, Referred, Rejected).</li>
+    <li><strong>Ratings & Reviews:</strong> Students can rate their referral experience with alumni, building accountability.</li>
+  </ul>
+
+  <h3>D. Administrative Panel</h3>
+  <ul>
+    <li><strong>Alumni Verification Queue:</strong> Alumni must upload employment verification proofs. Admins review proofs in a dedicated panel to approve or reject them.</li>
+    <li><strong>Report Auditing:</strong> System flag triggers when listings are reported, allowing admins to take down listings or ban users.</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <h2>3. System Safeguards & Security Fixes</h2>
+  <p>To ensure production-grade security, the following loopholes were addressed:</p>
+  <ul>
+    <li><strong>Email Change Verification:</strong> The old email remains active in the database until the verification code sent to the new email is correctly entered.</li>
+    <li><strong>SSO Password Setup:</strong> Google SSO users do not have a password initially. The Settings panel detects this, hides the "current password" requirement, and changes the field to "Set Account Password," allowing SSO users to define one.</li>
+    <li><strong>Account Deletion Safeguards:</strong> Prior to deletion, the system counts the user's active applications and posted referrals and prompts them with a confirmation warning: <em>"You have X active applications and Y posted referrals. Deleting your account will remove them permanently."</em></li>
+    <li><strong>Verification Gatekeepers:</strong> Unverified alumni profiles are blocked from creating new referral postings until approved by an administrator.</li>
+  </ul>
+
+  <h2>4. Technical Stack</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Layer</th>
+        <th>Technology</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Frontend</strong></td>
+        <td>React.js (Vite)</td>
+        <td>High-performance SPA frontend</td>
+      </tr>
+      <tr>
+        <td><strong>Routing</strong></td>
+        <td>React Router DOM</td>
+        <td>Client-side routing & query reading</td>
+      </tr>
+      <tr>
+        <td><strong>Styling</strong></td>
+        <td>Vanilla CSS</td>
+        <td>Custom Stitch Light Sage tokens theme</td>
+      </tr>
+      <tr>
+        <td><strong>Icons</strong></td>
+        <td>React Icons (Heroicons v2)</td>
+        <td>Premium vector iconography</td>
+      </tr>
+      <tr>
+        <td><strong>API Client</strong></td>
+        <td>Axios</td>
+        <td>Request/response HTTP interceptors</td>
+      </tr>
+      <tr>
+        <td><strong>Backend</strong></td>
+        <td>Node.js / Express.js</td>
+        <td>RESTful backend APIs</td>
+      </tr>
+      <tr>
+        <td><strong>Database</strong></td>
+        <td>PostgreSQL</td>
+        <td>Cloud-based relational database</td>
+      </tr>
+      <tr>
+        <td><strong>Mailer</strong></td>
+        <td>Nodemailer</td>
+        <td>Transactional OTP emails</td>
+      </tr>
+      <tr>
+        <td><strong>Security</strong></td>
+        <td>JWT, BcryptJS</td>
+        <td>Session tokens & password cryptography</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2>5. Database Schema</h2>
+  <p>The database consists of 14 relational tables, designed with foreign key cascades and indexes for performance:</p>
+  <ul>
+    <li><strong>users:</strong> Stores core profiles (id, email, password_hash, role, college, skills, company, verification_status).</li>
+    <li><strong>projects:</strong> Collaboration listings posted by students.</li>
+    <li><strong>team_members:</strong> Joins users to projects they are part of.</li>
+    <li><strong>team_applications:</strong> Applications submitted by students to join project teams.</li>
+    <li><strong>workspace_tasks:</strong> Tasks assigned within a project workspace (Todo/In Progress/Done).</li>
+    <li><strong>workspace_notes:</strong> Shared notes within project workspaces.</li>
+    <li><strong>milestones:</strong> Key checkpoints inside workspaces.</li>
+    <li><strong>portfolio_entries:</strong> Verified accomplishments shown on student profiles.</li>
+    <li><strong>referrals:</strong> Vacancy listings posted by alumni.</li>
+    <li><strong>referral_applications:</strong> Applications submitted by students for referrals.</li>
+    <li><strong>ratings:</strong> Scores (1-5) given to alumni by referred students.</li>
+    <li><strong>reports:</strong> Moderation flags for inappropriate listings.</li>
+    <li><strong>notifications:</strong> Real-time push alerts for user actions.</li>
+    <li><strong>audit_log:</strong> Track of administrative modifications.</li>
+  </ul>
+
+</body>
+</html>
